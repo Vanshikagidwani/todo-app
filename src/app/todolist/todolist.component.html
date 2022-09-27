@@ -1,0 +1,35 @@
+<div>
+  <form [formGroup]="newTodo">
+    <h3>Todolist</h3>
+    <button (click)="addTodo()" type="button">Add</button>
+    <div>
+      <ng-container *ngFor="let task of todo.controls; let i = index">
+        <span>{{ i + 1 }}</span>
+        <form (submit)="onSubmit()" [formGroup]="task">
+          <div class="spacer">
+            <label>title</label>
+            <input formControlName="title" type="text" />
+          </div>
+          <div>
+            <label>description</label>
+            <input formControlName="description" type="text" />
+          </div>
+          <div>
+            <button
+              [disabled]="i == 0 && todo.controls.length == 1"
+              (click)="removeTodo(i)"
+              type="button"
+            >
+              Remove
+            </button>
+            <button [disabled]="todo.value.length == 0" type="submit">
+              Save
+            </button>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+  </form>
+</div>
+
+<!-- (click)="submit()" -->
